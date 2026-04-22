@@ -422,6 +422,45 @@ body::before {
 .btn-snap:hover { color:#1A1A1A; }
 .btn-snap:hover svg { fill:#1A1A1A; }
 .btn-snap:hover { border-color:#D4BC8A; }
+.citem {
+  position: relative;
+  cursor: pointer;
+}
+
+.phone-actions {
+  position: absolute;
+  bottom: -110px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1A1A1A;
+  border: 1px solid rgba(198,169,107,.3);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+  width: 160px;
+  z-index: 50;
+}
+
+.phone-actions a {
+  color: #C6A96B;
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: .1em;
+}
+
+.phone-actions a:hover {
+  color: #fff;
+}
+
+.citem.active .phone-actions {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(10px);
+}
 
 /* ── FOOTER ── */
 footer {
@@ -595,16 +634,24 @@ footer {
 <section class="contact-section">
   <p class="slabel" data-reveal> Contactez-nous</p>
   <div class="contact-grid" data-reveal>
-    <div class="citem">
-      <svg viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13 4 8V6L12 11 20 6V8Z"/></svg>
-      <span class="citem-label">Email</span>
-      <span class="citem-val"><a href="mailto:chamaacandleeco@gmail.com">chamaacandleeco@gmail.com</a></span>
-    </div>
-    <div class="citem">
-      <svg viewBox="0 0 24 24"><path d="M6.6 10.8C7.8 13.2 9.8 15.2 12.2 16.4L14 14.6C14.2 14.4 14.6 14.3 14.9 14.5C16 14.8 17.1 15 18.3 15C18.8 15 19.2 15.4 19.2 15.9V18.3C19.2 18.8 18.8 19.2 18.3 19.2C9.9 19.2 3.2 12.5 3.2 4.1C3.2 3.6 3.6 3.2 4.1 3.2H6.5C7 3.2 7.4 3.6 7.4 4.1C7.4 5.3 7.6 6.4 8 7.5C8.1 7.8 8 8.1 7.8 8.4L6 10.2C6.1 10.4 6.3 10.6 6.6 10.8Z"/></svg>
-      <span class="citem-label">Phone</span>
-      <span class="citem-val"><a href="tel:++33745234127">+33 745 234 127</a></span>
-    </div>
+    <a href="mailto:chamaacandleco@gmail.com" class="citem">
+  <svg viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13 4 8V6L12 11 20 6V8Z"/></svg>
+  <span class="citem-label">Email</span>
+  <span class="citem-val">chamaacandleco@chamaa.com</span>
+</a>
+    <div class="citem" id="phoneBox">
+  <svg viewBox="0 0 24 24"><path d="M6.6 10.8C7.8 13.2 9.8 15.2 12.2 16.4L14 14.6C14.2 14.4 14.6 14.3 14.9 14.5C16 14.8 17.1 15 18.3 15C18.8 15 19.2 15.4 19.2 15.9V18.3C19.2 18.8 18.8 19.2 18.3 19.2C9.9 19.2 3.2 12.5 3.2 4.1C3.2 3.6 3.6 3.2 4.1 3.2H6.5C7 3.2 7.4 3.6 7.4 4.1C7.4 5.3 7.6 6.4 8 7.5C8.1 7.8 8 8.1 7.8 8.4L6 10.2C6.1 10.4 6.3 10.6 6.6 10.8Z"/></svg>
+
+  <span class="citem-label">Phone</span>
+  <span class="citem-val">+33 745 234 127</span>
+
+  <!-- menu options -->
+  <div class="phone-actions" id="phoneActions">
+    <a href="tel:+33745234127">📞 Appeler</a>
+    <a href="sms:+33745234127">💬 Message</a>
+    <a href="https://wa.me/33745234127" target="_blank">🟢 WhatsApp</a>
+  </div>
+</div>
     <div class="citem">
       <svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9C5 14.2 12 22 12 22C12 22 19 14.2 19 9C19 5.1 15.9 2 12 2ZM12 11.5C10.6 11.5 9.5 10.4 9.5 9C9.5 7.6 10.6 6.5 12 6.5C13.4 6.5 14.5 7.6 14.5 9C14.5 10.4 13.4 11.5 12 11.5Z"/></svg>
       <span class="citem-label">Location</span>
@@ -626,7 +673,7 @@ footer {
 
     <!-- Snapchat -->
     <a href="https://www.snapchat.com/add/chamaa_candles" target="_blank" rel="noopener" class="btn-cta btn-snap">
-      <svg viewBox="0 0 24 24"><path d="M12.166 2C9.021 2 6.268 3.68 5.005 6.168c-.496.978-.67 2.066-.59 3.13-.36.194-.758.298-1.165.298-.463 0-.94-.143-1.25-.39-.08-.065-.175-.098-.27-.098-.232 0-.432.198-.432.44 0 .17.098.325.255.4.854.407 1.41 1.18 1.41 2.047 0 .04-.004.08-.01.12-.27.2-.648.31-1.003.31a1.77 1.77 0 01-.59-.098c-.085-.03-.172-.046-.257-.046-.35 0-.614.275-.614.614 0 .252.154.47.39.566 1.38.557 2.34 1.6 2.764 2.905.15.47.214.87.148 1.178-.053.25.1.495.35.56.12.032.57.14 1.32.14.578 0 1.318-.072 2.236-.314.61-.158 1.222-.237 1.823-.237.6 0 1.213.08 1.82.237.92.242 1.66.314 2.237.314.75 0 1.2-.108 1.32-.14.25-.065.403-.31.35-.56-.066-.308-.003-.71.148-1.178.425-1.306 1.385-2.348 2.764-2.905.236-.096.39-.314.39-.566 0-.34-.264-.614-.614-.614a.7.7 0 00-.257.046c-.2.065-.4.098-.59.098-.355 0-.733-.11-1.004-.31-.005-.04-.01-.08-.01-.12 0-.867.557-1.64 1.41-2.047.158-.075.257-.23.257-.4 0-.242-.2-.44-.433-.44-.095 0-.19.033-.27.098-.31.247-.786.39-1.25.39-.406 0-.804-.104-1.164-.298.08-1.064-.094-2.152-.59-3.13C17.732 3.68 14.979 2 11.834 2h.332z"/></svg>
+      <path d="M12.166 2C9.021 2 6.268 3.68 5.005 6.168c-.496.978-.67 2.066-.59 3.13-.36.194-.758.298-1.165.298-.463 0-.94-.143-1.25-.39-.08-.065-.175-.098-.27-.098-.232 0-.432.198-.432.44 0 .17.098.325.255.4.854.407 1.41 1.18 1.41 2.047 0 .04-.004.08-.01.12-.27.2-.648.31-1.003.31a1.77 1.77 0 01-.59-.098c-.085-.03-.172-.046-.257-.046-.35 0-.614.275-.614.614 0 .252.154.47.39.566 1.38.557 2.34 1.6 2.764 2.905.15.47.214.87.148 1.178-.053.25.1.495.35.56.12.032.57.14 1.32.14.578 0 1.318-.072 2.236-.314.61-.158 1.222-.237 1.823-.237.6 0 1.213.08 1.82.237.92.242 1.66.314 2.237.314.75 0 1.2-.108 1.32-.14.25-.065.403-.31.35-.56-.066-.308-.003-.71.148-1.178.425-1.306 1.385-2.348 2.764-2.905.236-.096.39-.314.39-.566 0-.34-.264-.614-.614-.614a.7.7 0 00-.257.046c-.2.065-.4.098-.59.098-.355 0-.733-.11-1.004-.31-.005-.04-.01-.08-.01-.12 0-.867.557-1.64 1.41-2.047.158-.075.257-.23.257-.4 0-.242-.2-.44-.433-.44-.095 0-.19.033-.27.098-.31.247-.786.39-1.25.39-.406 0-.804-.104-1.164-.298.08-1.064-.094-2.152-.59-3.13C17.732 3.68 14.979 2 11.834 2h.332z"/></svg>
       <span>Snapchat</span>
     </a>
 
@@ -701,6 +748,16 @@ if(window.matchMedia('(pointer:fine)').matches){
     el.addEventListener('mouseleave',()=>ring.classList.remove('on-link'));
   });
 }
+const phoneBox = document.getElementById("phoneBox");
+
+phoneBox.addEventListener("click", (e) => {
+  e.stopPropagation();
+  phoneBox.classList.toggle("active");
+});
+
+document.addEventListener("click", () => {
+  phoneBox.classList.remove("active");
+});
 
 /* ── LIGHTBOX ── */
 const lb=document.getElementById('lightbox');
