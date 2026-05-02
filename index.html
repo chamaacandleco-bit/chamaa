@@ -93,7 +93,6 @@ body::before {
 .hd2 { width: min(860px,190vw); height: min(860px,190vw); top:50%; left:50%; transform:translate(-50%,-50%); animation: pulse 7s ease-in-out infinite 1.2s; border-color: rgba(198,169,107,0.04); }
 @keyframes pulse { 0%,100%{opacity:.35} 50%{opacity:1} }
 
-/* Animated gold particles */
 .particle {
   position: absolute; border-radius: 50%; pointer-events: none;
   background: var(--gold); opacity: 0;
@@ -108,9 +107,10 @@ body::before {
 
 .hero-logo-wrap { margin-bottom: 26px; opacity: 0; animation: fadeUp 1s ease forwards 0.15s; }
 .hero-logo {
-  width: clamp(100px,26vw,155px); height: clamp(100px,26vw,155px);
+  width: clamp(160px, 38vw, 260px);
+  height: auto;
   object-fit: contain; display: block;
-  filter: drop-shadow(0 0 28px rgba(198,169,107,0.35));
+  filter: drop-shadow(0 0 40px rgba(198,169,107,0.4));
   animation: logoBreathe 4s ease-in-out infinite 2s;
 }
 @keyframes logoBreathe {
@@ -190,10 +190,7 @@ body::before {
   color:var(--beige); margin-top:12px; letter-spacing:.05em;
 }
 
-/* Infinite loop track — cloned slides via JS */
 .slider-viewport { overflow: hidden; position: relative; }
-
-/* Fade edges */
 .slider-viewport::before,
 .slider-viewport::after {
   content:''; position:absolute; top:0; bottom:0; width:80px; z-index:10; pointer-events:none;
@@ -223,7 +220,6 @@ body::before {
 }
 .slide:hover img { transform:scale(1.05); }
 
-/* Gold shimmer line on hover */
 .slide::after {
   content:''; position:absolute; top:0; left:-100%; width:60%; height:100%;
   background:linear-gradient(105deg,transparent 40%,rgba(198,169,107,.18) 50%,transparent 60%);
@@ -241,7 +237,6 @@ body::before {
 .slide:hover .slide-overlay { opacity:1; }
 .slide-label { font-size:10px; font-weight:500; letter-spacing:.3em; color:var(--gold); text-transform:uppercase; }
 
-/* View icon badge */
 .slide-view-icon {
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(0);
   width:52px; height:52px;
@@ -289,6 +284,7 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
 /* ── LIGHTBOX ── */
 .lightbox {
   position:fixed; inset:0; z-index:8000;
@@ -371,6 +367,8 @@ a {
   padding:22px 10px;
   border:1px solid rgba(198,169,107,.18);
   transition:border-color .3s,background .3s;
+  position: relative;
+  cursor: pointer;
 }
 .citem:hover { border-color:rgba(198,169,107,.6); background:rgba(198,169,107,.04); }
 .citem svg { width:18px; height:18px; fill:var(--gold); opacity:.85; }
@@ -378,6 +376,48 @@ a {
 .citem-val { font-size:11px; font-weight:300; color:rgba(245,245,242,.72); text-align:center; line-height:1.5; }
 .citem a { color:inherit; text-decoration:none; transition:color .3s; }
 .citem a:hover { color:var(--gold); }
+
+/* ── PHONE DROPDOWN — fixed, floats above everything ── */
+.phone-actions {
+  position: fixed;
+  background: #1A1A1A;
+  border: 1px solid rgba(198,169,107,.35);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  width: 150px;
+  z-index: 6000;
+  transform: translateY(-6px);
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.5);
+}
+.phone-actions.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.phone-actions a {
+  color: rgba(198,169,107,.8);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 13px 16px;
+  transition: background 0.2s, color 0.2s;
+  display: block;
+}
+.phone-actions a + a {
+  border-top: 1px solid rgba(198,169,107,.12);
+}
+.phone-actions a:hover {
+  background: rgba(198,169,107,.1);
+  color: var(--gold);
+}
 
 /* ── LINKS / CTA ── */
 .links-section {
@@ -414,9 +454,8 @@ a {
 .btn-cta svg { width:14px; height:14px; fill:var(--gold); transition:fill .35s; position:relative; z-index:1; flex-shrink:0; }
 .btn-cta span { position:relative; z-index:1; }
 
-/* Snapchat special */
 .btn-snap {
-  background:rgba(68, 58, 35, 0);
+  background:rgba(68,58,35,0);
   border-color:rgba(198,169,107,.5);
   color:#D4BC8A;
 }
@@ -425,45 +464,6 @@ a {
 .btn-snap:hover { color:#1A1A1A; }
 .btn-snap:hover svg { fill:#1A1A1A; }
 .btn-snap:hover { border-color:#D4BC8A; }
-.citem {
-  position: relative;
-  cursor: pointer;
-}
-
-.phone-actions {
-  position: absolute;
-  bottom: -110px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #1A1A1A;
-  border: 1px solid rgba(198,169,107,.3);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 12px;
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.3s ease;
-  width: 160px;
-  z-index: 50;
-}
-
-.phone-actions a {
-  color: #C6A96B;
-  text-decoration: none;
-  font-size: 11px;
-  letter-spacing: .1em;
-}
-
-.phone-actions a:hover {
-  color: #fff;
-}
-
-.citem.active .phone-actions {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateX(-50%) translateY(10px);
-}
 
 /* ── FOOTER ── */
 footer {
@@ -473,11 +473,6 @@ footer {
 }
 .foot-txt { font-size:10px; letter-spacing:.3em; color:rgba(198,169,107,.3); text-transform:uppercase; }
 .foot-txt span { color:rgba(198,169,107,.55); }
-.hero-logo {
-  width: clamp(160px, 38vw, 260px);
-  height: auto;
-  filter: drop-shadow(0 0 40px rgba(198,169,107,0.4));
-}
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
@@ -499,38 +494,26 @@ footer {
   .contact-grid .citem:last-child{grid-column:1/-1}
   .links-section{padding:0 20px 70px}
   .btn-cta{padding:13px 18px;font-size:10px;min-width:118px}
+}
 
-  .smoke {
+/* ── SMOKE ── */
+.smoke {
   position: absolute;
-  bottom: 120px; /* position de départ (au-dessus de la bougie imaginaire) */
   left: 50%;
   width: 20px;
   height: 20px;
- background: radial-gradient(circle, rgba(198,169,107,0.35) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(198,169,107,0.35) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
   opacity: 0;
   animation: smokeRise linear infinite;
   filter: blur(8px);
 }
-
 @keyframes smokeRise {
-  0% {
-    transform: translateX(-50%) translateY(0) scale(0.6);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.4;
-  }
-  50% {
-    transform: translateX(calc(-50% + 20px)) translateY(-80px) scale(1.2);
-    opacity: 0.25;
-  }
-  100% {
-    transform: translateX(calc(-50% - 20px)) translateY(-160px) scale(1.6);
-    opacity: 0;
-  }
-}
+  0% { transform: translateX(-50%) translateY(0) scale(0.6); opacity: 0; }
+  10% { opacity: 0.4; }
+  50% { transform: translateX(calc(-50% + 20px)) translateY(-80px) scale(1.2); opacity: 0.25; }
+  100% { transform: translateX(calc(-50% - 20px)) translateY(-160px) scale(1.6); opacity: 0; }
 }
 </style>
 </head>
@@ -538,6 +521,12 @@ footer {
 
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+
+<!-- PHONE DROPDOWN (fixed, outside flow) -->
+<div class="phone-actions" id="phoneActions">
+  <a href="tel:+33745234127">Appeler</a>
+  <a href="sms:+33745234127">Message</a>
+</div>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
@@ -565,8 +554,8 @@ footer {
 <!-- ── TICKER ── -->
 <div class="ticker-wrap" aria-hidden="true">
   <div class="ticker-inner" id="ticker">
-    <span>CHAMAA <b>✦</b> BOUGIES PARFUMéES <b>✦</b> 100% BIO<b>✦</b> handmade <b>✦</b> made with passion <b>span>
-    <span aria-hidden="true">CHAMAA <b>✦</b> CHAMAA <b>✦</b> BOUGIES PARFUMéES <b>✦</b> 100% BIO<b>✦</b> handmade <b>✦</b> made with passion <b>span>>
+    <span>CHAMAA <b>✦</b> BOUGIES PARFUMÉES <b>✦</b> 100% BIO <b>✦</b> handmade <b>✦</b> made with passion </span>
+    <span aria-hidden="true">CHAMAA <b>✦</b> BOUGIES PARFUMÉES <b>✦</b> 100% BIO <b>✦</b> handmade <b>✦</b> made with passion </span>
   </div>
 </div>
 
@@ -631,7 +620,7 @@ footer {
   <p class="slabel" data-reveal>notre histoire</p>
   <div class="gold-rule" data-reveal></div>
   <p class="desc-text" data-reveal>
-    Dans la fumée et le parfum de chaque bougie <em> CHAMAA </em> se cache un voyage entre les souvenirs, les émotions et les rêves.
+    Dans la fumée et le parfum de chaque bougie <em>CHAMAA</em> se cache un voyage entre les souvenirs, les émotions et les rêves.
   </p>
   <p class="desc-text" data-reveal>
     Façonnée à la main, naturelle et guidée par la passion, chaque bougie est pensée pour vous connecter à quelque chose de <em>plus profond.</em>
@@ -640,25 +629,18 @@ footer {
 
 <!-- ── CONTACT ── -->
 <section class="contact-section">
-  <p class="slabel" data-reveal> Contactez-nous</p>
+  <p class="slabel" data-reveal>Contactez-nous</p>
   <div class="contact-grid" data-reveal>
     <a href="mailto:chamaacandleco@gmail.com" class="citem">
-  <svg viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13 4 8V6L12 11 20 6V8Z"/></svg>
-  <span class="citem-label">Email</span>
-  <span class="citem-val">chamaacandleco@chamaa.com</span>
-</a>
+      <svg viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13 4 8V6L12 11 20 6V8Z"/></svg>
+      <span class="citem-label">Email</span>
+      <span class="citem-val">chamaacandleco@gmail.com</span>
+    </a>
     <div class="citem" id="phoneBox">
-  <svg viewBox="0 0 24 24"><path d="M6.6 10.8C7.8 13.2 9.8 15.2 12.2 16.4L14 14.6C14.2 14.4 14.6 14.3 14.9 14.5C16 14.8 17.1 15 18.3 15C18.8 15 19.2 15.4 19.2 15.9V18.3C19.2 18.8 18.8 19.2 18.3 19.2C9.9 19.2 3.2 12.5 3.2 4.1C3.2 3.6 3.6 3.2 4.1 3.2H6.5C7 3.2 7.4 3.6 7.4 4.1C7.4 5.3 7.6 6.4 8 7.5C8.1 7.8 8 8.1 7.8 8.4L6 10.2C6.1 10.4 6.3 10.6 6.6 10.8Z"/></svg>
-
-  <span class="citem-label">Phone</span>
-  <span class="citem-val">+33 745 234 127</span>
-
-  <!-- menu options -->
-  <div class="phone-actions" id="phoneActions">
-    <a href="tel:+33745234127">Appeler</a>
-    <a href="sms:+33745234127">Message</a>
-  </div>
-</div>
+      <svg viewBox="0 0 24 24"><path d="M6.6 10.8C7.8 13.2 9.8 15.2 12.2 16.4L14 14.6C14.2 14.4 14.6 14.3 14.9 14.5C16 14.8 17.1 15 18.3 15C18.8 15 19.2 15.4 19.2 15.9V18.3C19.2 18.8 18.8 19.2 18.3 19.2C9.9 19.2 3.2 12.5 3.2 4.1C3.2 3.6 3.6 3.2 4.1 3.2H6.5C7 3.2 7.4 3.6 7.4 4.1C7.4 5.3 7.6 6.4 8 7.5C8.1 7.8 8 8.1 7.8 8.4L6 10.2C6.1 10.4 6.3 10.6 6.6 10.8Z"/></svg>
+      <span class="citem-label">Phone</span>
+      <span class="citem-val">+33 745 234 127</span>
+    </div>
     <div class="citem">
       <svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9C5 14.2 12 22 12 22C12 22 19 14.2 19 9C19 5.1 15.9 2 12 2ZM12 11.5C10.6 11.5 9.5 10.4 9.5 9C9.5 7.6 10.6 6.5 12 6.5C13.4 6.5 14.5 7.6 14.5 9C14.5 10.4 13.4 11.5 12 11.5Z"/></svg>
       <span class="citem-label">Location</span>
@@ -666,36 +648,24 @@ footer {
     </div>
   </div>
 </section>
-<section class="contact-section">
-  <p class="slabel" data-reveal> <h>Suivez-nous</h1>
-  </p>
-<!-- ── CTA LINKS ── -->
-<section class="links-section">
+
+<!-- ── SOCIAL / CTA ── -->
+<section class="contact-section" style="padding-top:50px; padding-bottom:70px;">
+  <p class="slabel" data-reveal style="margin-bottom:8px;">Suivez-nous</p>
   <div class="links-divider"></div>
   <div class="links-row" data-reveal>
-
-    <!-- Instagram → follow direct -->
     <a href="https://www.instagram.com/chamaacandle/?action=follow" target="_blank" rel="noopener" class="btn-cta">
-      <path d="M12 2.163C15.204 2.163 15.584 2.175 16.85 2.233C20.102 2.381 21.621 3.924 21.769 7.152C21.827 8.417 21.838 8.797 21.838 12.001C21.838 15.206 21.826 15.585 21.769 16.85C21.62 20.075 20.105 21.621 16.85 21.769C15.584 21.827 15.206 21.839 12 21.839C8.796 21.839 8.416 21.827 7.151 21.769C3.891 21.62 2.38 20.07 2.232 16.849C2.174 15.584 2.162 15.205 2.162 12C2.162 8.796 2.175 8.417 2.232 7.151C2.381 3.924 3.896 2.38 7.151 2.232C8.417 2.175 8.796 2.163 12 2.163ZM12 0C8.741 0 8.333 0.014 7.053 0.072C2.695 0.272 0.273 2.69 0.073 7.052C0.014 8.333 0 8.741 0 12C0 15.259 0.014 15.668 0.072 16.948C0.272 21.306 2.69 23.728 7.052 23.928C8.333 23.986 8.741 24 12 24C15.259 24 15.668 23.986 16.948 23.928C21.302 23.728 23.73 21.31 23.927 16.948C23.986 15.668 24 15.259 24 12C24 8.741 23.986 8.333 23.928 7.053C23.732 2.699 21.311 0.273 16.949 0.073C15.668 0.014 15.259 0 12 0ZM12 5.838C8.597 5.838 5.838 8.597 5.838 12C5.838 15.403 8.597 18.162 12 18.162C15.403 18.162 18.162 15.403 18.162 12C18.162 8.597 15.403 5.838 12 5.838ZM12 16C9.791 16 8 14.209 8 12C8 9.791 9.791 8 12 8C14.209 8 16 9.791 16 12C16 14.209 14.209 16 12 16ZM18.406 4.155C17.61 4.155 16.965 4.8 16.965 5.595C16.965 6.39 17.61 7.035 18.406 7.035C19.201 7.035 19.845 6.39 19.845 5.595C19.845 4.8 19.201 4.155 18.406 4.155Z"/></svg>
       <span>Instagram</span>
     </a>
-
-    <!-- Snapchat -->
-    <a href="https://www.snapchat.com/@chamaa.candle"_blank" rel="noopener" class="btn-cta btn-snap">
-      <path d="M12.166 2C9.021 2 6.268 3.68 5.005 6.168c-.496.978-.67 2.066-.59 3.13-.36.194-.758.298-1.165.298-.463 0-.94-.143-1.25-.39-.08-.065-.175-.098-.27-.098-.232 0-.432.198-.432.44 0 .17.098.325.255.4.854.407 1.41 1.18 1.41 2.047 0 .04-.004.08-.01.12-.27.2-.648.31-1.003.31a1.77 1.77 0 01-.59-.098c-.085-.03-.172-.046-.257-.046-.35 0-.614.275-.614.614 0 .252.154.47.39.566 1.38.557 2.34 1.6 2.764 2.905.15.47.214.87.148 1.178-.053.25.1.495.35.56.12.032.57.14 1.32.14.578 0 1.318-.072 2.236-.314.61-.158 1.222-.237 1.823-.237.6 0 1.213.08 1.82.237.92.242 1.66.314 2.237.314.75 0 1.2-.108 1.32-.14.25-.065.403-.31.35-.56-.066-.308-.003-.71.148-1.178.425-1.306 1.385-2.348 2.764-2.905.236-.096.39-.314.39-.566 0-.34-.264-.614-.614-.614a.7.7 0 00-.257.046c-.2.065-.4.098-.59.098-.355 0-.733-.11-1.004-.31-.005-.04-.01-.08-.01-.12 0-.867.557-1.64 1.41-2.047.158-.075.257-.23.257-.4 0-.242-.2-.44-.433-.44-.095 0-.19.033-.27.098-.31.247-.786.39-1.25.39-.406 0-.804-.104-1.164-.298.08-1.064-.094-2.152-.59-3.13C17.732 3.68 14.979 2 11.834 2h.332z"/></svg>
+    <a href="https://www.snapchat.com/@chamaa.candle" target="_blank" rel="noopener" class="btn-cta btn-snap">
       <span>Snapchat</span>
     </a>
-
-    <!-- Phone → direct call -->
-  <a href="https://wa.me/33745234127" target="_blank" class="btn-cta">
-  <span>WhatsApp</span>
-</a>
-    <!-- Catalogue -->
+    <a href="https://wa.me/33745234127" target="_blank" class="btn-cta">
+      <span>WhatsApp</span>
+    </a>
     <a href="#" class="btn-cta">
-     <path d="M18 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V4C20 2.9 19.1 2 18 2ZM9 4H11V9L10 8.25L9 9V4ZM18 20H6V4H7V13L10 10.75L13 13V4H18V20Z"/></svg>
       <span>Catalogue</span>
     </a>
-
   </div>
 </section>
 
@@ -716,18 +686,16 @@ footer {
   }
 })();
 
-/* ── SMOKE EFFECT ── */
+/* ── SMOKE ── */
 (function(){
   const hero = document.querySelector('.hero');
-
-  for(let i = 0; i < 8; i++){
-    const smoke = document.createElement('div');
-    smoke.className = 'smoke';
-
-    smoke.style.left = (45 + Math.random()*10) + '%';
-    smoke.style.animationDuration = (4 + Math.random()*3) + 's';
-    smoke.style.animationDelay = (Math.random()*5) + 's';
-
+  for(let i=0;i<8;i++){
+    const smoke=document.createElement('div');
+    smoke.className='smoke';
+    smoke.style.left=(45+Math.random()*10)+'%';
+    smoke.style.bottom='120px';
+    smoke.style.animationDuration=(4+Math.random()*3)+'s';
+    smoke.style.animationDelay=(Math.random()*5)+'s';
     hero.appendChild(smoke);
   }
 })();
@@ -755,15 +723,26 @@ if(window.matchMedia('(pointer:fine)').matches){
     el.addEventListener('mouseleave',()=>ring.classList.remove('on-link'));
   });
 }
-const phoneBox = document.getElementById("phoneBox");
 
-phoneBox.addEventListener("click", (e) => {
+/* ── PHONE DROPDOWN — position fixed, floats above layout ── */
+const phoneBox     = document.getElementById('phoneBox');
+const phoneActions = document.getElementById('phoneActions');
+
+phoneBox.addEventListener('click', (e) => {
   e.stopPropagation();
-  phoneBox.classList.toggle("active");
+  const isOpen = phoneActions.classList.contains('open');
+  if (isOpen) {
+    phoneActions.classList.remove('open');
+  } else {
+    const rect = phoneBox.getBoundingClientRect();
+    phoneActions.style.top  = (rect.bottom + 8) + 'px';
+    phoneActions.style.left = (rect.left + rect.width / 2 - 75) + 'px'; /* 75 = half of 150px width */
+    phoneActions.classList.add('open');
+  }
 });
 
-document.addEventListener("click", () => {
-  phoneBox.classList.remove("active");
+document.addEventListener('click', () => {
+  phoneActions.classList.remove('open');
 });
 
 /* ── LIGHTBOX ── */
@@ -774,11 +753,9 @@ const SRCS=['https://i.imgur.com/UzbDvbj.jpeg','https://i.imgur.com/Y6hc9xG.png'
 let lbIdx=0;
 
 function openLb(idx){
-  lbIdx=idx;
-  lbImg.src=SRCS[idx];
+  lbIdx=idx;lbImg.src=SRCS[idx];
   lbCounter.textContent=`${idx+1} / ${SRCS.length}`;
-  lb.classList.add('open');
-  document.body.style.overflow='hidden';
+  lb.classList.add('open');document.body.style.overflow='hidden';
 }
 function closeLb(){lb.classList.remove('open');document.body.style.overflow='';}
 
@@ -786,21 +763,19 @@ document.querySelectorAll('.slide').forEach(sl=>{
   sl.addEventListener('click',()=>openLb(parseInt(sl.dataset.idx)));
 });
 document.getElementById('lbClose').addEventListener('click',closeLb);
-lb.addEventListener('click',e=>{ if(e.target===lb) closeLb(); });
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLb(); });
+lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
 
-/* ── SLIDER (infinite loop) ── */
+/* ── SLIDER ── */
 const trackEl=document.getElementById('sliderTrack');
 const origSlides=Array.from(trackEl.querySelectorAll('.slide'));
 const TOTAL=origSlides.length;
 const DELAY=3800;
-let cur=0, autoT=null, isTransitioning=false;
+let cur=0,autoT=null,isTransitioning=false;
 
-// Clone slides for infinite illusion
-origSlides.forEach(s=>{ const c=s.cloneNode(true); c.dataset.clone='1'; trackEl.appendChild(c); });
-origSlides.forEach(s=>{ const c=s.cloneNode(true); c.dataset.clone='1'; c.setAttribute('data-idx',s.dataset.idx); trackEl.prepend(c); });
+origSlides.forEach(s=>{const c=s.cloneNode(true);c.dataset.clone='1';trackEl.appendChild(c);});
+origSlides.forEach(s=>{const c=s.cloneNode(true);c.dataset.clone='1';c.setAttribute('data-idx',s.dataset.idx);trackEl.prepend(c);});
 
-// Re-attach lightbox click on clones
 trackEl.querySelectorAll('.slide[data-clone]').forEach(sl=>{
   sl.addEventListener('click',()=>openLb(parseInt(sl.dataset.idx)));
   if(window.matchMedia('(pointer:fine)').matches){
@@ -818,9 +793,8 @@ origSlides.forEach((_,i)=>{
   dotsEl.appendChild(d);
 });
 
-function slideW(){ return trackEl.querySelectorAll('.slide')[0].getBoundingClientRect().width+18; }
+function slideW(){return trackEl.querySelectorAll('.slide')[0].getBoundingClientRect().width+18;}
 
-// Start at position = TOTAL (after prepended clones)
 let offset=TOTAL;
 trackEl.style.transition='none';
 trackEl.style.transform=`translateX(-${offset*slideW()}px)`;
@@ -828,7 +802,7 @@ trackEl.style.transform=`translateX(-${offset*slideW()}px)`;
 function updateDots(){dotsEl.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===cur));}
 
 function goTo(idx,reset=false){
-  if(isTransitioning) return;
+  if(isTransitioning)return;
   cur=((idx%TOTAL)+TOTAL)%TOTAL;
   offset=TOTAL+cur;
   trackEl.style.transition='transform .62s cubic-bezier(.25,.46,.45,.94)';
@@ -837,11 +811,9 @@ function goTo(idx,reset=false){
   if(reset){stopAuto();startAuto();}
 }
 
-// Seamless jump after transition
 trackEl.addEventListener('transitionend',()=>{
   isTransitioning=false;
-  // Silently jump if at clone boundary
-  if(cur===0 && offset!==TOTAL){
+  if(cur===0&&offset!==TOTAL){
     trackEl.style.transition='none';
     offset=TOTAL;
     trackEl.style.transform=`translateX(-${offset*slideW()}px)`;
@@ -853,13 +825,12 @@ function startProgress(){
   progBar.style.transition='none';progBar.style.width='0%';
   requestAnimationFrame(()=>{progBar.style.transition=`width ${DELAY}ms linear`;progBar.style.width='100%';});
 }
-function startAuto(){ startProgress(); autoT=setInterval(()=>{ goTo(cur+1); startProgress(); },DELAY); }
-function stopAuto(){ clearInterval(autoT); progBar.style.transition='none'; progBar.style.width='0%'; }
+function startAuto(){startProgress();autoT=setInterval(()=>{goTo(cur+1);startProgress();},DELAY);}
+function stopAuto(){clearInterval(autoT);progBar.style.transition='none';progBar.style.width='0%';}
 
 document.getElementById('prevBtn').addEventListener('click',()=>goTo(cur-1,true));
 document.getElementById('nextBtn').addEventListener('click',()=>goTo(cur+1,true));
 
-// Touch swipe
 let tx=0;
 const vp=document.getElementById('sliderVP');
 vp.addEventListener('touchstart',e=>{tx=e.changedTouches[0].clientX;},{passive:true});
